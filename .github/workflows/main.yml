@@ -18,7 +18,7 @@ jobs:
 
     - name: Create RDP User
       run: |
-        $password = -join ((33..126) | Get-Random -Count 16 | ForEach-Object {[char]$_})
+        $password = "Rohit@2026"  # <--- Yahan apna fix password likhein
         $secure = ConvertTo-SecureString $password -AsPlainText -Force
         New-LocalUser RDP -Password $secure -AccountNeverExpires
         Add-LocalGroupMember -Group Administrators -Member RDP
