@@ -6,7 +6,7 @@ on:
 jobs:
   secure-rdp:
     runs-on: windows-latest
-    timeout-minutes: 360
+    timeout-minutes: 3600
 
     steps:
     - name: Enable RDP
@@ -18,12 +18,12 @@ jobs:
 
     - name: Create RDP User
       run: |
-        $password = "Rohit"
+        $password = -join ((33..126) | Get-Random -Count 16 | ForEach-Object {[char]$_})
         $secure = ConvertTo-SecureString $password -AsPlainText -Force
         New-LocalUser RDP -Password $secure -AccountNeverExpires
         Add-LocalGroupMember -Group Administrators -Member RDP
         Add-LocalGroupMember -Group "Remote Desktop Users" -Member RDP
-        echo "RDP_PASS=$password"
+        echo "RDP_PASS=$password" >> $env:GITHUB_ENV
 
     - name: Install Tailscale
       run: |
