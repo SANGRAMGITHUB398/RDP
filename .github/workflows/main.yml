@@ -43,6 +43,6 @@ jobs:
         echo "======================"
         echo "IP: $env:TS_IP"
         echo "User: RDP"
-        echo "Pass: RDP"
+        echo "Pass: Rohit"
         echo "======================"
         while ($true) { Start-Sleep 300 }
